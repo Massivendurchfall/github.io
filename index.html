@@ -80,78 +80,76 @@
   </div>
   <div class="toast" id="toast"></div>
 
-  <script>
-    const TOTAL_PAGES=18;
-    const files=Array.from({length:TOTAL_PAGES},(_,i)=>`${i+1}.png`);
+<script>
+  const TOTAL_PAGES=18;
+  const files=Array.from({length:TOTAL_PAGES},(_,i)=>`${i+1}.png`);
 
-    const INDEX=[{n:'7 Ginger',s:1},{n:'Arnold Palmer',s:1},{n:'Beach Comer',s:1},{n:'Beefeater Gin & Tonic',s:1},{n:'Black Russian',s:1},{n:'Blk Russian',s:1},{n:'Bloody Maria',s:1},{n:'Blue Lagoon',s:1},{n:'Blue Scoob',s:1},{n:'California Surfer',s:2},{n:'Choccy Teeni',s:2},{n:'Chocolatini',s:2},{n:'Chocolate Old Fashioned',s:2},{n:'Colorado Bulldog',s:2},{n:'Cosmopolitan',s:2},{n:'Cranberry Beton',s:2},{n:'Cuba Libre',s:2},{n:'Da Bird',s:3},{n:'Diablo',s:3},{n:'Dream Punk',s:3},{n:'Espresso Teeni',s:3},{n:'French Teeni',s:3},{n:'French 75',s:3},{n:'Grey Garden',s:3},{n:'Grin Reaper',s:3},{n:'Irish Lemonade',s:4},{n:'Jack & Coke',s:4},{n:'Jack and Coke',s:4},{n:'Jack & Jingle',s:4},{n:'Jelly Teeni',s:4},{n:'Jager Bomb',s:4},{n:'Jäger Bomb',s:4},{n:'Last Word',s:4},{n:'Lemon-Drop',s:4},{n:'Limoncello Collins',s:4},{n:'Longpolitan',s:5},{n:'Manhattan',s:5},{n:'Massey Teeni',s:5},{n:'Mafia Mojito',s:5},{n:'Malebu Mojito',s:5},{n:'Malebu Sunrise',s:5},{n:'Malebu Pina Colada',s:5},{n:'Martel Sidecar',s:5},{n:'Menma',s:6},{n:'Mojito',s:6},{n:'Mojo',s:6},{n:'Mudslide',s:6},{n:'Naigroni',s:6},{n:'Negroni',s:6},{n:'Old Fashioned',s:6},{n:'Paloma',s:6},{n:'Palmer',s:6},{n:'Passion Star Teeni',s:7},{n:'Pernoid Fizz',s:7},{n:'Penicillin',s:7},{n:'Pina Colada',s:7},{n:'Sea Journey',s:7},{n:'Regret',s:7},{n:'Regret and Sorrow',s:7},{n:"Roblox's Delight",s:7},{n:"Roblock's Delight",s:7},{n:'Sambuca Sour',s:8},{n:'Shirley',s:8},{n:'Shirley Temple',s:8},{n:'Sorrow',s:8},{n:'Spooks Surprise',s:8},{n:'Swift Sour',s:8},{n:'Tequila Sunrise',s:8},{n:'Twist Tea',s:8},{n:'Vod. Teeni',s:9},{n:'Vod Teeni',s:9},{n:'Vodka Teeni',s:9},{n:'Whisc Smash',s:9},{n:'Whisc Sour',s:9},{n:'Wht Russian',s:9},{n:'White Russian',s:9},{n:'X on the Beach',s:9},{n:'Sex on the Beach',s:9}];
+  const INDEX=[{n:'7 Ginger',s:1},{n:'Arnold Palmer',s:1},{n:'Beach Comer',s:1},{n:'Beefeater Gin & Tonic',s:1},{n:'Black Russian',s:1},{n:'Blk Russian',s:1},{n:'Bloody Maria',s:1},{n:'Blue Lagoon',s:1},{n:'Blue Scoob',s:1},{n:'California Surfer',s:2},{n:'Choccy Teeni',s:2},{n:'Chocolatini',s:2},{n:'Chocolate Old Fashioned',s:2},{n:'Colorado Bulldog',s:2},{n:'Cosmopolitan',s:2},{n:'Cranberry Beton',s:2},{n:'Cuba Libre',s:2},{n:'Da Bird',s:3},{n:'Diablo',s:3},{n:'Dream Punk',s:3},{n:'Espresso Teeni',s:3},{n:'French Teeni',s:3},{n:'French 75',s:3},{n:'Grey Garden',s:3},{n:'Grin Reaper',s:3},{n:'Irish Lemonade',s:4},{n:'Jack & Coke',s:4},{n:'Jack and Coke',s:4},{n:'Jack & Jingle',s:4},{n:'Jelly Teeni',s:4},{n:'Jager Bomb',s:4},{n:'Jäger Bomb',s:4},{n:'Last Word',s:4},{n:'Lemon-Drop',s:4},{n:'Limoncello Collins',s:4},{n:'Longpolitan',s:5},{n:'Manhattan',s:5},{n:'Massey Teeni',s:5},{n:'Mafia Mojito',s:5},{n:'Malebu Mojito',s:5},{n:'Malebu Sunrise',s:5},{n:'Malebu Pina Colada',s:5},{n:'Martel Sidecar',s:5},{n:'Menma',s:6},{n:'Mojito',s:6},{n:'Mojo',s:6},{n:'Mudslide',s:6},{n:'Naigroni',s:6},{n:'Negroni',s:6},{n:'Old Fashioned',s:6},{n:'Paloma',s:6},{n:'Palmer',s:6},{n:'Passion Star Teeni',s:7},{n:'Pernoid Fizz',s:7},{n:'Penicillin',s:7},{n:'Pina Colada',s:7},{n:'Sea Journey',s:7},{n:'Regret',s:7},{n:'Regret and Sorrow',s:7},{n:"Roblox's Delight",s:7},{n:"Roblock's Delight",s:7},{n:'Sambuca Sour',s:8},{n:'Shirley',s:8},{n:'Shirley Temple',s:8},{n:'Sorrow',s:8},{n:'Spooks Surprise',s:8},{n:'Swift Sour',s:8},{n:'Tequila Sunrise',s:8},{n:'Twist Tea',s:8},{n:'Vod. Teeni',s:9},{n:'Vod Teeni',s:9},{n:'Vodka Teeni',s:9},{n:'Whisc Smash',s:9},{n:'Whisc Sour',s:9},{n:'Wht Russian',s:9},{n:'White Russian',s:9},{n:'X on the Beach',s:9},{n:'Sex on the Beach',s:9}];
 
-    const $L=document.getElementById('left');
-    const $R=document.getElementById('right');
-    const $pager=document.getElementById('pager');
-    const $prev=document.getElementById('prev');
-    const $next=document.getElementById('next');
-    const $q=document.getElementById('q');
-    const $find=document.getElementById('find');
-    const $toast=document.getElementById('toast');
-    const $book=document.querySelector('.book');
+  const $L=document.getElementById('left');
+  const $R=document.getElementById('right');
+  const $pager=document.getElementById('pager');
+  const $prev=document.getElementById('prev');
+  const $next=document.getElementById('next');
+  const $q=document.getElementById('q');
+  const $find=document.getElementById('find');
+  const $toast=document.getElementById('toast');
+  const $book=document.querySelector('.book');
 
-    let iPage=0;
+  let iPage=0;
 
-    function renderSide(el,src){
-      el.innerHTML='';
-      const media=document.createElement('div');media.className='media';
-      if(src){
-        const img=new Image();img.alt='';
-        img.onload=()=>{img.style.opacity='1'};
-        img.src=`${src}?v=${Date.now()}`;
-        img.onerror=()=>{media.innerHTML=`<div style="color:#777">Missing: ${src}</div>`};
-        media.append(img)
-      }else{
-        media.innerHTML='<div style="color:#777">—</div>'
-      }
-      media.style.gridRow='1 / -1';media.style.height='100%';media.style.width='100%';el.append(media)
-    }
+  function renderSide(el,src){
+    el.innerHTML='';
+    const media=document.createElement('div');media.className='media';
+    if(src){
+      const img=new Image();img.alt='';
+      img.onload=()=>{img.style.opacity='1'};
+      img.src=`${src}?v=${Date.now()}`;
+      img.onerror=()=>{media.innerHTML=`<div style="color:#777">Missing: ${src}</div>`};
+      media.append(img)
+    }else{media.innerHTML='<div style="color:#777">—</div>'}
+    media.style.gridRow='1 / -1';media.style.height='100%';media.style.width='100%';el.append(media)
+  }
 
-    function render(){
-      const mobile=matchMedia('(max-width: 800px)').matches;
-      const left=files[iPage]||null;
-      const right=mobile?null:(files[iPage+1]||null);
-      renderSide($L,left);
-      if(mobile){$R.style.visibility='hidden';$R.innerHTML='';}
-      else{$R.style.visibility='';renderSide($R,right);}
-      const total=Math.ceil(files.length/(mobile?1:2));
-      const current=mobile?(iPage+1):(Math.floor(iPage/2)+1);
-      $pager.textContent=`${current} / ${total}`;
-      $prev.disabled=iPage===0;
-      $next.disabled=mobile?(iPage>=files.length-1):(iPage>=files.length-2);
-    }
+  function render(){
+    const mobile=matchMedia('(max-width: 800px)').matches;
+    const left=files[iPage]||null;
+    const right=mobile?null:(files[iPage+1]||null);
+    renderSide($L,left);
+    if(mobile){$R.style.visibility='hidden';$R.innerHTML='';}
+    else{$R.style.visibility='';renderSide($R,right);}
+    const total=Math.ceil(files.length/(mobile?1:2));
+    const current=mobile?(iPage+1):(Math.floor(iPage/2)+1);
+    $pager.textContent=`${current} / ${total}`;
+    $prev.disabled=iPage===0;
+    $next.disabled=mobile?(iPage>=files.length-1):(iPage>=files.length-2);
+  }
 
-    function next(){const mobile=matchMedia('(max-width: 800px)').matches;const step=mobile?1:2;if(iPage<files.length-step){iPage+=step;render();}}
-    function prev(){const mobile=matchMedia('(max-width: 800px)').matches;const step=mobile?1:2;if(iPage>=step){iPage-=step;render();}else if(iPage>0){iPage=0;render();}}
+  function next(){const mobile=matchMedia('(max-width: 800px)').matches;const step=mobile?1:2;if(iPage<files.length-step){iPage+=step;render();}}
+  function prev(){const mobile=matchMedia('(max-width: 800px)').matches;const step=mobile?1:2;if(iPage>=step){iPage-=step;render();}else if(iPage>0){iPage=0;render();}}
 
-    function toast(t){$toast.textContent=t;$toast.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>{$toast.classList.remove('show')},1600)}
-    function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim()}
-    function lev(a,b){const m=a.length,n=b.length,d=Array.from({length:m+1},()=>Array(n+1).fill(0));for(let i=0;i<=m;i++)d[i][0]=i;for(let j=0;j<=n;j++)d[0][j]=j;for(let i=1;i<=m;i++){for(let j=1;j<=n;j++){const c=a[i-1]===b[j-1]?0:1;d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+c)}}return d[m][n]}
-    function score(q,c){const a=norm(q),b=norm(c);if(!a||!b)return 0;if(b.includes(a))return 1;const qa=a.split(' '),qb=b.split(' '),inter=qa.filter(t=>qb.includes(t)).length;const tok=inter/qa.length;const l=1-lev(a,b)/Math.max(a.length,b.length);return Math.max(tok,l)}
-    function gotoSpread(n){const maxSpreads=Math.ceil(files.length/2);if(n<1||n>maxSpreads){toast('Page out of range');return}iPage=(n-1)*2;render()}
-    function runSearch(){const q=$q.value.trim();if(!q){toast('Enter a drink name');return}const ranked=INDEX.map(x=>({s:x.s,n:x.n,sc:score(q,x.n)})).sort((a,b)=>b.sc-a.sc);const best=ranked[0];if(!best||best.sc<0.5){toast('No close match');return}gotoSpread(best.s)}
+  function toast(t){$toast.textContent=t;$toast.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>{$toast.classList.remove('show')},1600)}
+  function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim()}
+  function lev(a,b){const m=a.length,n=b.length,d=Array.from({length:m+1},()=>Array(n+1).fill(0));for(let i=0;i<=m;i++)d[i][0]=i;for(let j=0;j<=n;j++)d[0][j]=j;for(let i=1;i<=m;i++){for(let j=1;j<=n;j++){const c=a[i-1]===b[j-1]?0:1;d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+c)}}return d[m][n]}
+  function score(q,c){const a=norm(q),b=norm(c);if(!a||!b)return 0;if(b.includes(a))return 1;const qa=a.split(' '),qb=b.split(' '),inter=qa.filter(t=>qb.includes(t)).length;const tok=inter/qa.length;const l=1-lev(a,b)/Math.max(a.length,b.length);return Math.max(tok,l)}
+  function gotoSpread(n){const maxSpreads=Math.ceil(files.length/2);if(n<1||n>maxSpreads){toast('Page out of range');return}iPage=(n-1)*2;render()}
+  function runSearch(){const q=$q.value.trim();if(!q){toast('Enter a drink name');return}const ranked=INDEX.map(x=>({s:x.s,n:x.n,sc:score(q,x.n)})).sort((a,b)=>b.sc-a.sc);const best=ranked[0];if(!best||best.sc<0.5){toast('No close match');return}gotoSpread(best.s)}
 
-    $next.addEventListener('click',next);
-    $prev.addEventListener('click',prev);
-    $find.addEventListener('click',runSearch);
-    $q.addEventListener('keydown',e=>{if(e.key==='Enter')runSearch()});
-    window.addEventListener('keydown',e=>{if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev()});
+  $next.addEventListener('click',next);
+  $prev.addEventListener('click',prev);
+  $find.addEventListener('click',runSearch);
+  $q.addEventListener('keydown',e=>{if(e.key==='Enter')runSearch()});
+  window.addEventListener('keydown',e=>{if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev()});
 
-    let tSX=null,tSY=null;
-    if($book){
-      $book.addEventListener('touchstart',e=>{const t=e.touches[0];tSX=t.clientX;tSY=t.clientY},{passive:true});
-      $book.addEventListener('touchend',e=>{const t=e.changedTouches[0];if(tSX==null)return;const dx=t.clientX-tSX,dy=t.clientY-tSY;tSX=null;tSY=null;if(Math.abs(dx)>50&&Math.abs(dy)<60){if(dx<0)next();else prev();}},{passive:true});
-    }
+  let tSX=null,tSY=null;
+  if($book){
+    $book.addEventListener('touchstart',e=>{const t=e.touches[0];tSX=t.clientX;tSY=t.clientY},{passive:true});
+    $book.addEventListener('touchend',e=>{const t=e.changedTouches[0];if(tSX==null)return;const dx=t.clientX-tSX,dy=t.clientY-tSY;tSX=null;tSY=null;if(Math.abs(dx)>50&&Math.abs(dy)<60){if(dx<0)next();else prev();}},{passive:true});
+  }
 
-    window.addEventListener('resize',render);
-    files.forEach(src=>{const im=new Image();im.src=src});
-    render();
-  </script>
+  window.addEventListener('resize',render);
+  files.forEach(src=>{const im=new Image();im.src=src});
+  render();
+</script>
 </body>
 </html>
