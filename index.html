@@ -26,12 +26,18 @@
     .brand{color:var(--gold);font-weight:600;letter-spacing:.4px}
     .pager{font-size:.9rem;color:#cfcfcf}
     @media (max-width:800px){.book{aspect-ratio:3/4;grid-template-columns:1fr}.spine{display:none}}
+  .search{display:flex;gap:8px;align-items:center}
+    .search input{width:min(360px,48vw);padding:10px 12px;border-radius:999px;border:1px solid #00000026;background:#121214;color:#eee;outline:none}
+    .search button{padding:10px 14px;border-radius:999px;border:1px solid #00000014;background:#ffffff;cursor:pointer}
+    .toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 14px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .25s}
+    .toast.show{opacity:1}
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="bar">
       <div class="brand">Poké Haven · Recipes</div>
+      <div class="search"><input id="q" placeholder="Search drink…" autocomplete="off"><button id="find">Search</button></div>
       <div class="pager" id="pager">1 / 1</div>
     </div>
     <section class="book" aria-label="Recipe book">
@@ -48,6 +54,7 @@
       </div>
     </section>
   </div>
+  <div class="toast" id="toast"></div>
   <script>
     const TOTAL_PAGES = 18;
     const files = Array.from({ length: TOTAL_PAGES }, (_, i) => `${i + 1}.png`);
@@ -104,7 +111,7 @@ function toast(t){$toast.textContent=t;$toast.classList.add('show');clearTimeout
 function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]+/g,' ').replace(/ +/g,' ').trim()}
 function lev(a,b){const m=a.length,n=b.length,d=Array.from({length:m+1},()=>Array(n+1).fill(0));for(let i=0;i<=m;i++)d[i][0]=i;for(let j=0;j<=n;j++)d[0][j]=j;for(let i=1;i<=m;i++){for(let j=1;j<=n;j++){const c=a[i-1]===b[j-1]?0:1;d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+c)}}return d[m][n]}
 function score(q,c){const a=norm(q),b=norm(c);if(!a||!b)return 0;if(b.includes(a))return 1;const qa=a.split(' '),qb=b.split(' '),inter=qa.filter(t=>qb.includes(t)).length;const tok=inter/qa.length;const l=1-lev(a,b)/Math.max(a.length,b.length);return Math.max(tok,l)}
-function gotoSpread(n){if(!window.spreads){toast('Not ready');return}if(n<1||n>spreads.length){toast('Page out of range');return}window.iSpread=n-1;window.render()}
+function gotoSpread(n){if(n<1||n>spreads.length){toast('Page out of range');return}iSpread=n-1;render()}if(n<1||n>spreads.length){toast('Page out of range');return}window.iSpread=n-1;window.render()}
 function runSearch(){const q=$q.value.trim();if(!q){toast('Enter a drink name');return}const ranked=INDEX.map(x=>({s:x.s,n:x.n,sc:score(q,x.n)})).sort((a,b)=>b.sc-a.sc);const best=ranked[0];if(!best||best.sc<0.5){toast('No close match');return}gotoSpread(best.s)}
 if($find){$find.addEventListener('click',runSearch)}
 if($q){$q.addEventListener('keydown',e=>{if(e.key==='Enter')runSearch()})}
